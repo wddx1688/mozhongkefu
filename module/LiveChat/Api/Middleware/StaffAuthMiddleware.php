@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\LiveChat\Api\Middleware; use Illuminate\Support\Facades\Session; use ModStart\Core\Input\Request; use ModStart\Core\Input\Response; use Module\LiveChat\Api\Support\StaffLoginCheck; use Module\LiveChat\Type\AccountStatus; use Module\LiveChat\Util\AccountUtil; use Module\Vendor\Support\ResponseCodes; class StaffAuthMiddleware { public function handle($Sh3_E, \Closure $JNgx0) { goto krMTv; T88s5: if (empty($iwLDV)) { if (is_subclass_of($HB1O4, StaffLoginCheck::class)) { if (property_exists($HB1O4, 'loginCheckIgnores') && is_array($HB1O4::$loginCheckIgnores) && in_array($yA25I, $HB1O4::$loginCheckIgnores)) { } else { return Response::json(ResponseCodes::LOGIN_REQUIRED, '请登录'); } } } goto KNB7R; NAjQi: return $JNgx0($Sh3_E); goto kcHtK; krMTv: list($HB1O4, $yA25I) = Request::getControllerAction(); goto JL2WV; U3hWI: $B5WTe = null; goto EPpmZ; KNB7R: Session::put('liveChatAccountId', $iwLDV); goto A1Dix; JL2WV: $iwLDV = intval(Session::get('liveChatAccountId', 0)); goto U3hWI; EPpmZ: if ($iwLDV) { goto Mn9ju; Mn9ju: $B5WTe = AccountUtil::get($iwLDV); goto kqJHI; kqJHI: AccountUtil::processDefault($B5WTe); goto vjNlk; vjNlk: if ($B5WTe) { switch ($B5WTe['status']) { case AccountStatus::FORBIDDEN: $B5WTe = null; break; } } goto fYOb2; fYOb2: } goto iX957; A1Dix: Session::flash('_liveChatAccount', $B5WTe); goto NAjQi; iX957: if ($iwLDV && !$B5WTe) { $iwLDV = 0; Session::forget('liveChatAccountId'); } goto T88s5; kcHtK: } }

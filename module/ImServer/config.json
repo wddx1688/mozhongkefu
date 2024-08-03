@@ -1,0 +1,17 @@
+{
+    "name": "ImServer",
+    "title": "IM通讯",
+    "types": [
+        "Arch"
+    ],
+    "require": [
+        "Vendor"
+    ],
+    "env": [
+        "laravel5",
+        "laravel9"
+    ],
+    "version": "1.1.0",
+    "author": "官方",
+    "description": "提供即时聊天的底层基础框架"
+}

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Command; use Illuminate\Console\Command; use Illuminate\Support\Facades\Event; use ModStart\Core\Events\ModuleEnabledEvent; use ModStart\Core\Exception\BizException; use ModStart\ModStart; use ModStart\Module\ModuleManager; class ModuleEnableCommand extends Command { protected $signature = 'modstart:module-enable {module}'; public function handle() { goto anTJ9; CwD_A: $Fkq2W = ModuleManager::listAllInstalledModules(); goto NIFeT; eeFHE: $Fkq2W[$C1S_N]['enable'] = true; goto sO9NI; sO9NI: ModuleManager::saveUserInstalledModules($Fkq2W); goto mN7yv; blsC5: BizException::throwsIf(L('Module Invalid'), !ModuleManager::isExists($C1S_N)); goto CwD_A; mN7yv: ModStart::clearCache(); goto P3525; fmOtg: $this->info('Module Enable Success'); goto b2hlT; NIFeT: $tKVmk = ModuleManager::getModuleBasic($C1S_N); goto Wf7Xp; JW618: if (PHP_VERSION_ID >= 80000) { Event::dispatch($bZKZ0); } else { Event::fire($bZKZ0); } goto fmOtg; mw2j4: $bZKZ0 = new ModuleEnabledEvent(); goto FG_MT; anTJ9: $C1S_N = $this->argument('module'); goto blsC5; Wf7Xp: BizException::throwsIf('Module basic empty', !$tKVmk); goto eeFHE; FG_MT: $bZKZ0->name = $C1S_N; goto JW618; P3525: ModuleManager::callHook($C1S_N, 'hookEnabled'); goto mw2j4; b2hlT: } }

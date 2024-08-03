@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\ImServer\Core\Model; use ModStart\Core\Dao\ModelUtil; use Module\ImServer\Core\Repository\RedisRepository; use Module\ImServer\Type\ImUserFriendStatus; class UserFriendModel { public static function isFriend($GkyPc, $HYsgo, $rE7VK = false) { goto JSsDz; BvRfs: if ($rE7VK) { RedisRepository::setex($LzFZ1, $f6fHU, 3600); } goto ER4GQ; jaX3D: $f6fHU = ModelUtil::exists('im_user_friend', array('userId1' => $GkyPc, 'userId2' => $HYsgo, 'status' => ImUserFriendStatus::ACTIVE)); goto BvRfs; yKCYy: $LzFZ1 = 'UF:' . $GkyPc . '_' . $HYsgo; goto s90mC; s90mC: if ($rE7VK && RedisRepository::get($LzFZ1)) { return true; } goto jaX3D; JSsDz: if ($GkyPc > $HYsgo) { goto tEqDQ; qJmOq: $GkyPc = $HYsgo; goto V2AN1; V2AN1: $HYsgo = $fmwH0; goto xRt4U; tEqDQ: $fmwH0 = $GkyPc; goto qJmOq; xRt4U: } goto yKCYy; ER4GQ: return $f6fHU; goto RB3yZ; RB3yZ: } public static function listFriendUserIds($qzstR) { goto odniz; TSpT_: foreach ($EnI2D as $He0J8) { if ($qzstR == $He0J8['userId1']) { $swc4I[] = $He0J8['userId2']; } else { $swc4I[] = $He0J8['userId1']; } } goto SIeyk; FNtlO: $swc4I = array(); goto TSpT_; SIeyk: return array_unique($swc4I); goto d3Pcl; odniz: $EnI2D = ModelUtil::model('im_user_friend')->whereRaw("(userId1={$qzstR} OR userId2={$qzstR}) AND status=" . ImUserFriendStatus::ACTIVE)->get(array('userId1', 'userId2')); goto FNtlO; d3Pcl: } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; use Illuminate\Support\Facades\Session; class SessionUtil { public static function id() { return Session::getId(); } private static function getDataFromSession($WMf4I) { goto XeQ2j; YTyK4: return $nx179; goto CK3cX; id4YJ: $nx179 = @unserialize($sad4e); goto A2CxA; XeQ2j: $sad4e = Session::getHandler()->read($WMf4I); goto id4YJ; A2CxA: if (!is_array($nx179)) { $nx179 = array(); } goto YTyK4; CK3cX: } private static function saveDataToSession($WMf4I, $nx179) { $sad4e = serialize($nx179); Session::getHandler()->write($WMf4I, $sad4e); } public static function get($WMf4I, $cANPj) { $nx179 = self::getDataFromSession($WMf4I); return isset($nx179[$cANPj]) ? $nx179[$cANPj] : null; } public static function put($WMf4I, $cANPj, $VuXfH) { goto anajl; LnAiI: self::saveDataToSession($WMf4I, $nx179); goto eXYUO; anajl: $nx179 = self::getDataFromSession($WMf4I); goto M1Nif; M1Nif: $nx179[$cANPj] = $VuXfH; goto LnAiI; eXYUO: } public static function forget($WMf4I, $cANPj) { goto HKVM1; HKVM1: $nx179 = self::getDataFromSession($WMf4I); goto ufNo0; ufNo0: unset($nx179[$cANPj]); goto puKGo; puKGo: self::saveDataToSession($WMf4I, $nx179); goto iRBPM; iRBPM: } public static function clear($WMf4I) { self::saveDataToSession($WMf4I, array()); } }

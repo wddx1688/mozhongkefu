@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Converter; use ModStart\Core\Dao\ModelUtil; use Module\Vendor\Html\HtmlConverterInterceptor; class AtMemberHtmlInterceptor implements HtmlConverterInterceptor { public function convert($ZpNyF) { goto Q1VAV; nQEo8: if (empty($u1dS8)) { return $ZpNyF; } goto pusyi; pusyi: $YCDDl = array(); goto pccne; tlLlh: $o5O4d = array(); goto oCHNp; oCHNp: foreach ($rGUSQ[1] as $oPu4k => $RVGZv) { goto cNMM5; iKrsT: $o5O4d[$rGUSQ[0][$oPu4k]] = $RVGZv; goto j5uUY; A5URM: if (empty($RVGZv)) { continue; } goto iKrsT; cNMM5: $RVGZv = trim($RVGZv); goto A5URM; j5uUY: } goto a1ffW; lt5Ue: return $ZpNyF; goto rJSSR; Q1VAV: preg_match_all('/@(.*?):/', $ZpNyF, $rGUSQ); goto PLMYa; gEBso: $u1dS8 = ModelUtil::model('member_user')->whereIn('username', array_values($o5O4d))->get()->toArray(); goto nQEo8; PLMYa: if (empty($rGUSQ[1])) { return $ZpNyF; } goto tlLlh; pccne: foreach ($u1dS8 as $CRCLA) { $YCDDl[$CRCLA['username']] = $CRCLA; } goto ONprh; ONprh: foreach ($o5O4d as $Or_28 => $RVGZv) { goto nnE54; VLkZR: $hc_1z = str_replace('{id}', $YCDDl[$RVGZv]['id'], '/member/{id}'); goto RRCNe; nnE54: if (empty($YCDDl[$RVGZv])) { continue; } goto VLkZR; RRCNe: $ZpNyF = str_replace($Or_28, '<a href="' . $hc_1z . '" target="_blank">@' . $YCDDl[$RVGZv]['username'] . '</a>: ', $ZpNyF); goto OuLfm; OuLfm: } goto lt5Ue; a1ffW: if (empty($o5O4d)) { return $ZpNyF; } goto gEBso; rJSSR: } }

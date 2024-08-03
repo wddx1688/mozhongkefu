@@ -1,0 +1,16 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Concern\HasAdminQuickCRUD; use ModStart\Admin\Layout\AdminConfigBuilder; use ModStart\Admin\Layout\AdminCRUDBuilder; use ModStart\Core\Dao\ModelUtil; use ModStart\Form\Form; use ModStart\Grid\GridFilter; use ModStart\Module\ModuleManager; use ModStart\Support\Concern\HasFields; use Module\Member\Biz\Vip\MemberVipBiz; use Module\Member\Util\MemberVipUtil; class MemberVipSetController extends Controller { use HasAdminQuickCRUD; protected function crud(AdminCRUDBuilder $U2qv4) { $U2qv4->init('member_vip_set')->field(function ($U2qv4) { $U2qv4->layoutPanel('基础信息', function ($U2qv4) { $U2qv4->id('id', 'ID')->addable(true)->editable(true)->ruleUnique('member_vip_set')->required()->defaultValue(ModelUtil::sortNext('member_vip_set', array(), 'id')); $U2qv4->text('title', '名称')->required()->ruleUnique('member_vip_set'); $U2qv4->text('flag', '英文标识')->required()->ruleUnique('member_vip_set'); $U2qv4->switch('visible', '可见')->gridEditable(true)->tip('开启后前台用户VIP开通页面可见'); $U2qv4->switch('isDefault', '默认')->optionsYesNo()->help('会员是否默认为该等级')->required(); $U2qv4->image('icon', '图标'); $U2qv4->currency('price', '价格')->required(); $U2qv4->number('vipDays', '时间')->required()->help('单位为天，365表示1年'); $U2qv4->text('desc', '简要说明')->required(); $U2qv4->richHtml('content', '详细说明')->required(); if (ModuleManager::getModuleConfig('Member', 'creditEnable', false)) { $U2qv4->switch('creditPresentEnable', '赠送积分')->when('=', true, function ($yAhCR) { $yAhCR->number('creditPresentValue', '赠送积分数量'); })->optionsYesNo()->listable(false); } }); foreach (MemberVipBiz::all() as $UegGl) { $U2qv4->layoutPanel($UegGl->title(), function ($U2qv4) use($UegGl) { $UegGl->vipField($U2qv4); }); } $U2qv4->display('created_at', L('Created At'))->listable(false); $U2qv4->display('updated_at', L('Updated At'))->listable(false); })->gridFilter(function (GridFilter $RryBq) { $RryBq->like('title', '名称'); })->gridOperateAppend('
+<a href="javascript:;" class="btn btn-primary" data-dialog-width="90%" data-dialog-height="90%" data-dialog-request="' . modstart_admin_url('member_vip_set/config') . '">
+    <i class="iconfont icon-cog"></i>
+    功能设置
+</a>
+<a href="javascript:;" class="btn btn-primary" data-dialog-width="90%" data-dialog-height="90%" data-dialog-request="' . modstart_admin_url('member_vip_right') . '">
+    <i class="iconfont icon-cube"></i>
+    权益设置
+</a>
+')->operateFixed('right')->enablePagination(false)->defaultOrder(array('sort', 'asc'))->canSort(true)->canShow(false)->title('用户VIP等级')->addDialogSize(array('600px', '95%'))->editDialogSize(array('600px', '95%'))->hookSaved(function (Form $yAhCR) { MemberVipUtil::clearCache(); }); } public function config(AdminConfigBuilder $U2qv4) { goto q9PaX; ehDoE: $U2qv4->formClass('wide'); goto G1vJy; G1vJy: return $U2qv4->perform(); goto TPrGO; N5zJM: $U2qv4->pageTitle('功能设置'); goto b69o7; b69o7: $U2qv4->richHtml('Member_VipContent', 'VIP开通说明')->help('默认为 VIP开通说明'); goto ehDoE; q9PaX: $U2qv4->useDialog(); goto N5zJM; TPrGO: } }

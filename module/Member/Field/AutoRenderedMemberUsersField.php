@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Field; use ModStart\Core\Assets\AssetsUtil; use ModStart\Core\Util\ArrayUtil; use ModStart\Field\AutoRenderedFieldValue; use ModStart\Field\Type\FieldRenderMode; use Module\Member\Util\MemberUtil; class AutoRenderedMemberUsersField { public static function make($pKkQq, $uZEpM) { switch ($pKkQq) { case FieldRenderMode::GRID: case FieldRenderMode::DETAIL: $kxwYt = array_map(function ($AVLNU) { return '<span class="ub-tag sm">' . htmlspecialchars($AVLNU) . '</span>'; }, MemberUtil::listViewName($uZEpM['memberUserIds'])); return AutoRenderedFieldValue::make(join(' ', $kxwYt)); case FieldRenderMode::FORM: goto TIZFe; TIZFe: $u1dS8 = MemberUtil::listUsers($uZEpM['memberUserIds']); goto wvk6n; TbCdp: $u1dS8 = array_map(function ($AVLNU) { return array('value' => intval($AVLNU['id']), 'name' => MemberUtil::viewName($AVLNU), 'avatar' => AssetsUtil::fixOrDefault($AVLNU['avatar'], 'asset/image/avatar.svg')); }, $u1dS8); goto NZ_WU; NZ_WU: return AutoRenderedFieldValue::makeView('module::Member.View.field.memberUsers', array('memberUserIds' => $ZHQJQ, 'memberUsers' => $u1dS8, 'param' => $uZEpM)); goto yQ45F; wvk6n: $ZHQJQ = ArrayUtil::flatItemsByKey($u1dS8, 'id'); goto TbCdp; yQ45F: } } }

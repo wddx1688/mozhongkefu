@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Nav\Util; use Illuminate\Support\Facades\Cache; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Util\TreeUtil; use Module\Nav\Type\NavPosition; class NavUtil { const CACHE_KEY_PREFIX = 'nav:'; public static function add($s2RTs, $rfBQu, $kL49b) { $p3Gtl = intval(ModelUtil::max('nav', 'sort')) + 1; ModelUtil::insert('nav', array('position' => $s2RTs, 'name' => $rfBQu, 'link' => $kL49b, 'sort' => $p3Gtl)); } public static function tree() { $IveoN = TreeUtil::modelToTree('nav', array('position' => 'position', 'name' => 'name', 'openType' => 'openType', 'link' => 'link', 'icon' => 'icon'), 'id', 'pid', 'sort', array('enable' => true)); return $IveoN; } public static function listByPosition($s2RTs = 'head') { $IveoN = self::tree(); return array_filter($IveoN, function ($AVLNU) use($s2RTs) { return $AVLNU['position'] == $s2RTs; }); } public static function listByPositionWithCache($s2RTs = 'head', $cp12z = 600) { return Cache::remember(self::CACHE_KEY_PREFIX . $s2RTs, $cp12z, function () use($s2RTs) { return self::listByPosition($s2RTs); }); } public static function hasData($s2RTs = 'head') { $aOaiS = self::listByPositionWithCache($s2RTs); return !empty($aOaiS); } public static function clearCache() { foreach (NavPosition::getList() as $U8G_W => $HdyS4) { Cache::forget(self::CACHE_KEY_PREFIX . $U8G_W); } } }

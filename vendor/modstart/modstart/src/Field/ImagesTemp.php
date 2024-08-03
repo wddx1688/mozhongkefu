@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Field; use ModStart\Core\Input\Response; use ModStart\Core\Util\ConvertUtil; use ModStart\Core\Util\SerializeUtil; use ModStart\Data\DataManager; class ImagesTemp extends AbstractField { protected $width = 80; protected static $js = array('asset/common/uploadButton.js'); protected function setup() { $this->addVariables(array('server' => modstart_admin_url('data/file_manager/image'))); } public function server($HCA_O) { $this->addVariables(array('server' => $HCA_O)); return $this; } public function unserializeValue($VuXfH, AbstractField $dBa7F) { if (null === $VuXfH) { return $VuXfH; } return ConvertUtil::toArray($VuXfH); } public function serializeValue($VuXfH, $Wa8N4) { return SerializeUtil::jsonEncode($VuXfH); } public function prepareInput($VuXfH, $Wa8N4) { goto LndPY; S3H49: if (is_array($VuXfH)) { foreach ($VuXfH as $dKmL2 => $yFWLi) { if (DataManager::isDataTemp($yFWLi)) { goto HxKOU; HxKOU: $nMi2c = DataManager::storeTempDataByPath($yFWLi); goto EXps2; EXps2: if (Response::isError($nMi2c)) { continue; } goto E3Oqj; E3Oqj: $VuXfH[$dKmL2] = DataManager::fix($nMi2c['data']['path']); goto n4W5w; n4W5w: } } } goto jZqZK; LndPY: $VuXfH = ConvertUtil::toArray($VuXfH); goto S3H49; jZqZK: return $VuXfH; goto SOw1Z; SOw1Z: } }

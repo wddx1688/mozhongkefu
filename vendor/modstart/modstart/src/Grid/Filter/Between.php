@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Grid\Filter; use ModStart\Core\Util\SerializeUtil; class Between extends AbstractFilter { protected $view = null; public function formatId($NS5_3) { $CeOJi = str_replace('.', '_', $NS5_3); return array('start' => "{$CeOJi}_start", 'end' => "{$CeOJi}_end"); } protected function formatName($NS5_3) { goto UoNC2; gLVaZ: if (count($zlw0F) == 1) { $HQ4FM = $zlw0F[0]; } else { $HQ4FM = array_shift($zlw0F); foreach ($zlw0F as $NS5_3) { $HQ4FM .= "[{$NS5_3}]"; } } goto Knj_y; Knj_y: return array('start' => "{$HQ4FM}[start]", 'end' => "{$HQ4FM}[end]"); goto oOZ1v; UoNC2: $zlw0F = explode('.', $NS5_3); goto gLVaZ; oOZ1v: } public function datetime($iVFbz = array()) { $this->view = 'admin::filter.betweenDatetime'; $this->prepareForDatetime($iVFbz); } protected function prepareForDatetime($iVFbz = array()) { goto bKAaC; szuEV: $iVFbz['locale'] = array_get($iVFbz, 'locale', config('app.locale')); goto oYP0J; oYP0J: $AGXdG = SerializeUtil::jsonEncode($iVFbz); goto divdw; bKAaC: $iVFbz['format'] = array_get($iVFbz, 'format', 'YYYY-MM-DD HH:mm:ss'); goto szuEV; divdw: $b8j1a = SerializeUtil::jsonEncode($iVFbz + array('useCurrent' => false)); goto HRHQe; HRHQe: } public function render() { if (isset($this->view)) { return view($this->view, $this->variables()); } return parent::render(); } }

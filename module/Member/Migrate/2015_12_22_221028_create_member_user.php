@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ use Illuminate\Database\Schema\Blueprint; use Illuminate\Database\Migrations\Migration; class CreateMemberUser extends Migration { public function up() { Schema::create('member_user', function (Blueprint $S_2ik) { $S_2ik->increments('id'); $S_2ik->timestamps(); $S_2ik->string('username', 50)->nullable()->comment('用户名'); $S_2ik->string('phone', 20)->nullable()->comment('手机'); $S_2ik->string('email', 200)->nullable()->comment('邮箱')->charset('utf8'); $S_2ik->char('password', 32)->nullable()->comment('密码'); $S_2ik->char('passwordSalt', 16)->nullable()->comment('密码Salt'); $S_2ik->timestamp('lastLoginTime')->nullable()->comment('上次登录时间'); $S_2ik->string('lastLoginIp', 20)->nullable()->comment('上次登录Ip'); $S_2ik->boolean('phoneVerified')->nullable()->comment('手机已验证'); $S_2ik->boolean('emailVerified')->nullable()->comment('邮箱已验证'); $S_2ik->string('avatar', 100)->nullable()->comment('头像(小)'); $S_2ik->string('avatarMedium', 100)->nullable()->comment('头像(中)'); $S_2ik->string('avatarBig', 100)->nullable()->comment('头像(大)'); $S_2ik->tinyInteger('gender')->nullable()->comment('性别'); $S_2ik->string('realname', 20)->nullable()->comment('真实姓名'); $S_2ik->string('signature', 200)->nullable()->comment('个性签名'); $S_2ik->index('username'); $S_2ik->index('phone'); $S_2ik->index('email'); }); } public function down() { } }

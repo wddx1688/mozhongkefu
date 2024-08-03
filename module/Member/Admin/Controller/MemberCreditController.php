@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Auth\AdminPermission; use ModStart\Admin\Layout\AdminDialogPage; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use ModStart\Core\Util\CRUDUtil; use ModStart\Form\Form; use Module\Member\Util\MemberCreditUtil; class MemberCreditController extends Controller { public static $PermitMethodMap = array('*' => '\\Module\\Member\\Admin\\Controller\\MemberController@index'); public function charge(AdminDialogPage $ZkvUG) { goto DiVv3; jaJlX: $yAhCR = Form::make(''); goto GpmHX; DiVv3: $tJ6XI = InputPackage::buildFromInput()->getInteger('memberUserId'); goto jaJlX; myLIV: $yAhCR->text('remark', '说明')->defaultValue('系统变更')->required(); goto WYDa1; WYDa1: $yAhCR->showSubmit(false)->showReset(false); goto KSg5q; GpmHX: $yAhCR->display('_total', '总积分')->value(MemberCreditUtil::getTotal($tJ6XI))->addable(true); goto xZHjd; KSg5q: return $ZkvUG->pageTitle('积分变更')->body($yAhCR)->handleForm($yAhCR, function (Form $yAhCR) use($tJ6XI) { AdminPermission::demoCheck(); $XWlC_ = $yAhCR->dataForming(); ModelUtil::transactionBegin(); MemberCreditUtil::change($tJ6XI, $XWlC_['change'], $XWlC_['remark']); ModelUtil::transactionCommit(); return Response::redirect(CRUDUtil::jsDialogCloseAndParentRefresh()); }); goto V2GU4; xZHjd: $yAhCR->number('change', '积分变更')->help('负数表示减少')->required(); goto myLIV; V2GU4: } }

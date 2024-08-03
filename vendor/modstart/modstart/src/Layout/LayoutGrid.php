@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Layout; use ModStart\Core\Util\IdUtil; use ModStart\Field\AbstractField; class LayoutGrid extends AbstractField { protected $isLayoutField = true; private $layoutClosure = null; public function __construct($hB9j0) { parent::__construct(IdUtil::generate('LayoutGrid')); $this->layoutClosure = $hB9j0; } public function postSetup() { goto w6fhb; ij1wR: call_user_func($this->layoutClosure, $this); goto AVttt; AVttt: $this->context->html($this->column() . '_end')->html('</div>')->plain(); goto l5EyR; w6fhb: $this->context->html($this->column() . '_end')->html('<div class="row">')->plain(); goto ij1wR; l5EyR: } public function layoutColumn($DUF5a, $hB9j0) { goto vd74v; vd74v: if (!is_array($DUF5a)) { $DUF5a = array($DUF5a, 12); } goto wmLzK; wmLzK: $this->context->html($this->column() . '_end')->html('<div class="col-md-' . $DUF5a[0] . ' col-' . $DUF5a[1] . '">')->plain(); goto jd2Ev; sDAZB: $this->context->html($this->column() . '_end')->html('</div>')->plain(); goto u2fDF; jd2Ev: call_user_func($hB9j0, $this->context); goto sDAZB; u2fDF: } public function render() { return ''; } }

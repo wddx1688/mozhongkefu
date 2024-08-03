@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; use NinjaMutex\Lock\MySqlLock; use NinjaMutex\MutexFabric; class LockUtil { static $instance = null; private static function instance() { if (null === self::$instance) { goto kFEty; kFEty: $giroC = new MySqlLock(config('env.DB_USERNAME'), config('env.DB_PASSWORD'), config('env.DB_HOST')); goto OQc13; gwyUX: self::$instance = $nnS04; goto W5c5W; OQc13: $nnS04 = new MutexFabric('mysql', $giroC); goto gwyUX; W5c5W: } return self::$instance; } public static function acquire($HQ4FM, $r2jZv = 60) { if (RedisUtil::isEnable()) { goto JIhAQ; ISc6G: $KriFX = RedisUtil::get($cANPj); goto flu0j; lkiaN: if (RedisUtil::setnx($cANPj, time() + $r2jZv)) { RedisUtil::expire($cANPj, $r2jZv); return true; } goto ISc6G; JIhAQ: $cANPj = "Lock:{$HQ4FM}"; goto lkiaN; lTRg2: return false; goto daStU; flu0j: if ($KriFX < time()) { RedisUtil::delete($cANPj); return self::acquire($HQ4FM, $r2jZv); } goto lTRg2; daStU: } else { if (self::instance()->get($HQ4FM)->acquireLock($r2jZv)) { return true; } } return false; } public static function release($HQ4FM) { if (RedisUtil::isEnable()) { $cANPj = "Lock:{$HQ4FM}"; RedisUtil::delete($cANPj); } else { self::instance()->get($HQ4FM)->releaseLock(); } } }

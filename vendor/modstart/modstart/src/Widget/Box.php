@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; use Illuminate\Contracts\Support\Renderable; class Box extends AbstractWidget { protected $view = 'modstart::widget.box'; protected $title = ''; protected $classList = ''; protected $content = ''; protected $tools = array(); public function __construct($N19iJ, $iqgWB = '', $ew5sY = '') { goto RLtSq; NBozb: if ($iqgWB) { $this->title($iqgWB); } goto JH_nK; RLtSq: parent::__construct(); goto EfXuo; EfXuo: if ($N19iJ) { $this->content($N19iJ); } goto NBozb; JH_nK: if ($ew5sY) { $this->classList($ew5sY); } goto g1DZf; g1DZf: } public static function make($N19iJ, $iqgWB = '', $ew5sY = '') { return new Box($N19iJ, $iqgWB, $ew5sY); } public function content($N19iJ) { $this->content = $N19iJ; return $this; } public function title($iqgWB) { $this->title = $iqgWB; return $this; } public function classList($ew5sY) { $this->classList = $ew5sY; return $this; } public function tool($soE5z) { $this->tools[] = $this->toString($soE5z); return $this; } public function variables() { return array('title' => $this->title, 'classList' => $this->classList, 'content' => $this->toString($this->content), 'tools' => $this->tools); } }

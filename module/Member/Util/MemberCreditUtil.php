@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Util; use ModStart\Core\Dao\ModelUtil; class MemberCreditUtil { public static function paginateLog($tJ6XI, $ZkvUG, $PP9UF, $cD48i = array()) { goto xVYY7; hVOna: return ModelUtil::paginate('member_credit_log', $ZkvUG, $PP9UF, $cD48i); goto HhpUV; rR7Fo: $cD48i['order'] = array('id', 'desc'); goto hVOna; xVYY7: $cD48i['where']['memberUserId'] = $tJ6XI; goto rR7Fo; HhpUV: } public static function getTotal($tJ6XI) { goto dvieP; YOgRX: if (empty($E1j2M)) { return 0; } goto Q7THh; Q7THh: return $E1j2M['total']; goto xpahk; dvieP: $E1j2M = ModelUtil::get('member_credit', array('memberUserId' => $tJ6XI)); goto YOgRX; xpahk: } public static function change($tJ6XI, $MBpBZ, $bv12A) { goto jtgpm; buDHU: $E1j2M = ModelUtil::getWithLock('member_credit', array('memberUserId' => $tJ6XI)); goto GTsss; GTsss: if (empty($E1j2M)) { $E1j2M = ModelUtil::insert('member_credit', array('memberUserId' => $tJ6XI, 'total' => 0)); } goto fHZ8s; hsGPP: ModelUtil::insert('member_credit_log', array('memberUserId' => $tJ6XI, 'change' => $MBpBZ, 'remark' => $bv12A)); goto ktSeX; ktSeX: ModelUtil::update('member_credit', array('id' => $E1j2M['id']), array('total' => $E1j2M['total'] + $MBpBZ)); goto Bc8Nj; jtgpm: if (!$MBpBZ) { throw new \Exception('MemberCreditUtil -> change empty'); } goto buDHU; fHZ8s: if ($MBpBZ < 0 && $E1j2M['total'] + $MBpBZ < 0) { throw new \Exception('MemberCreditUtil -> total change to empty'); } goto hsGPP; Bc8Nj: } }

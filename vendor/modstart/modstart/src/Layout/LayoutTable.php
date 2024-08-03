@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Layout; use ModStart\Core\Util\IdUtil; use ModStart\Field\AbstractField; class LayoutTable extends AbstractField { protected $isLayoutField = true; private $layoutClosure = null; public function __construct($hB9j0) { parent::__construct(IdUtil::generate('LayoutTable')); $this->layoutClosure = $hB9j0; } public function postSetup() { goto p3Tqv; zpzGG: call_user_func($this->layoutClosure, $this); goto WTQ1A; WTQ1A: $this->context->html($this->column() . '_end')->html('</table>')->plain(); goto tEXCq; p3Tqv: $this->context->html($this->column() . '_end')->html('<table class="ub-table border ub-content-bg">')->plain(); goto zpzGG; tEXCq: } public function layoutRow($hB9j0) { goto CjR1A; eY387: call_user_func($hB9j0, $this); goto CHz0P; CHz0P: $this->context->html($this->column() . '_end')->html('</tr>')->plain(); goto wRSHE; CjR1A: $this->context->html($this->column() . '_end')->html('<tr>')->plain(); goto eY387; wRSHE: } public function layoutCol($hB9j0) { goto BT8Yh; GPTO5: $this->context->html($this->column() . '_end')->html('</td>')->plain(); goto T1YQ2; BT8Yh: $this->context->html($this->column() . '_end')->html('<td>')->plain(); goto Cmptg; Cmptg: call_user_func($hB9j0, $this->context); goto GPTO5; T1YQ2: } public function render() { return ''; } }

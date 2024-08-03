@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; use ModStart\Core\Util\RenderUtil; class ContentBox extends AbstractWidget { protected $view = 'modstart::widget.contentBox'; protected $classList = ''; protected $content = ''; public static function make($N19iJ, $ew5sY = 'margin-bottom') { goto JIl_R; DOTIu: return $EGxkN; goto qqlW9; JIl_R: $EGxkN = new static(); goto T_H2P; HPVck: $EGxkN->classList($ew5sY); goto DOTIu; T_H2P: $EGxkN->content($N19iJ); goto HPVck; qqlW9: } public static function breadcrumb($c0PBf, $ew5sY = 'margin-bottom') { goto Nzti5; S4Z4a: $N19iJ = RenderUtil::view('modstart::widget.breadcrumb', array('items' => $c0PBf)); goto deaAs; deaAs: $EGxkN->content($N19iJ); goto O1YHD; AzfFQ: return $EGxkN; goto e8BVO; Nzti5: $EGxkN = new static(); goto S4Z4a; O1YHD: $EGxkN->classList($ew5sY); goto AzfFQ; e8BVO: } public function content($N19iJ) { $this->content = $N19iJ; return $this; } public function classList($ew5sY) { $this->classList = $ew5sY; return $this; } public function variables() { return array('classList' => $this->classList, 'content' => $this->toString($this->content)); } }

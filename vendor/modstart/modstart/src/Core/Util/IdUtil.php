@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; class IdUtil { public static function generate($lIcLr = 'Default') { goto v5fhC; vGYoC: if (empty($bx4aO[$lIcLr])) { $bx4aO[$lIcLr] = 0; } goto cHJbA; v5fhC: static $bx4aO = array(); goto vGYoC; cHJbA: $bx4aO[$lIcLr]++; goto KBJQt; KBJQt: return $lIcLr . '_' . $bx4aO[$lIcLr]; goto H6frm; H6frm: } public static function next64BitId() { return intval(microtime(true) * 10000) . getmypid() % 10 . sprintf('%04d', rand(0, 9999)); } public static function next64BitIdSeq($Z8Xqn = null) { goto U3dSe; sJggD: static $sXGGB = 0; goto OYibY; T7qIA: $TTdjI = $UomWP; goto IVTHn; OYibY: static $AfxyH = null; goto Sdljb; IVTHn: if ($Z8Xqn === null) { $Z8Xqn = getmypid(); } goto O9sXo; U3dSe: static $TTdjI = null; goto sJggD; Sdljb: do { $UomWP = intval(microtime(true) * 10000); if ($UomWP !== $TTdjI) { $sXGGB = 0; } } while ($sXGGB >= 1000); goto T7qIA; KQ_iQ: if (null === $AfxyH) { $AfxyH = rand(0, 9); } goto FlXz7; FlXz7: return $UomWP . $UK9Ks . $AfxyH . sprintf('%03d', $sXGGB++); goto ousiI; O9sXo: $UK9Ks = $Z8Xqn % 10; goto KQ_iQ; ousiI: } public static function generateSN() { return date('YmdHis', time()) . sprintf('%05d', rand(0, 99999)); } }

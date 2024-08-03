@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; class ReUtil { public static function group($PjL1d, $ZIfTd, $RNfdf) { try { if (preg_match($PjL1d, $ZIfTd, $jRzIK)) { return $jRzIK[$RNfdf]; } } catch (\Exception $l8i0J) { } return null; } public static function group0($PjL1d, $ZIfTd) { try { return self::group($PjL1d, $ZIfTd, 0); } catch (\Exception $l8i0J) { } return null; } public static function group1($PjL1d, $ZIfTd) { try { return self::group($PjL1d, $ZIfTd, 1); } catch (\Exception $l8i0J) { } return null; } public static function isWildMatch($XW9D0, $ZIfTd) { goto irszj; EFH7D: return preg_match($PjL1d, $ZIfTd); goto BBaIy; dR4Xw: $PjL1d = '/^' . preg_quote($XW9D0, '/') . '$/'; goto co1GQ; irszj: $XW9D0 = str_replace('*', '__x__star__', $XW9D0); goto dR4Xw; co1GQ: $PjL1d = str_replace('__x__star__', '.*', $PjL1d); goto EFH7D; BBaIy: } public static function replace($N19iJ, $PjL1d, $k_TMY) { goto Y_cqs; Y_cqs: preg_match_all($PjL1d, $N19iJ, $jRzIK); goto Jrr9t; Izflk: return $N19iJ; goto o3dht; Jrr9t: foreach ($jRzIK[0] as $qsK6T => $yFWLi) { goto VYYq0; unOxW: $mxc8E = call_user_func_array($k_TMY, array($BnPIe)); goto dAKYu; dAKYu: $N19iJ = str_replace($yFWLi, $mxc8E, $N19iJ); goto u0kqd; VYYq0: $BnPIe = array_map(function ($VL0g3) use($qsK6T, $jRzIK) { return $VL0g3[$qsK6T]; }, $jRzIK); goto unOxW; u0kqd: } goto Izflk; o3dht: } }

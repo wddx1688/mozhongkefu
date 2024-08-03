@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Field; use ModStart\Core\Util\SerializeUtil; class Values extends AbstractField { protected $width = 300; protected $listable = false; protected function setup() { $this->addVariables(array('viewMode' => 'default', 'countFixed' => false)); } public function viewMode($sSMmt) { $this->addVariables(array('viewMode' => $sSMmt)); return $this; } public function countFixed($VjQ3H) { $this->addVariables(array('countFixed' => $VjQ3H)); return $this; } public function viewModeMini() { return $this->viewMode('mini'); } public function unserializeValue($VuXfH, AbstractField $dBa7F) { goto i1GaP; uDsXs: return $VuXfH; goto HA_rj; wN0rr: if (empty($VuXfH)) { $VuXfH = array(); } goto uDsXs; i1GaP: if (null === $VuXfH) { return $VuXfH; } goto jrCV0; jrCV0: $VuXfH = @json_decode($VuXfH, true); goto wN0rr; HA_rj: } public function serializeValue($VuXfH, $Wa8N4) { return SerializeUtil::jsonEncode($VuXfH); } public function prepareInput($VuXfH, $Wa8N4) { goto UfGpa; lzRii: return $VuXfH; goto Lzoz1; jgDy5: if (empty($VuXfH)) { $VuXfH = array(); } goto lzRii; UfGpa: $VuXfH = @json_decode($VuXfH, true); goto jgDy5; Lzoz1: } }

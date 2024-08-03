@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; class ButtonLink extends AbstractWidget { public static function getAssets() { return array('style' => ''); } public static function make(...$wnXyT) { goto oCBLu; tCIQ1: $EGxkN->url($wnXyT[2]); goto o2vj6; F31Bz: $EGxkN->text($wnXyT[1]); goto tCIQ1; oCBLu: $EGxkN = new static(); goto UeKk3; UeKk3: $EGxkN->type($wnXyT[0]); goto F31Bz; o2vj6: return $EGxkN; goto NV2ZA; NV2ZA: } public static function __callStatic($HQ4FM, $wnXyT) { goto rrvKb; lEg9J: throw new \Exception('ButtonAjaxRequest error ' . join(',', $m8cil) . ' '); goto rwdK0; rrvKb: $m8cil = array('muted', 'warning', 'danger', 'success', 'primary'); goto akVJ1; akVJ1: if (in_array($HQ4FM, $m8cil)) { goto hp5s0; brkPw: return $EGxkN; goto ktXjr; bqGzM: $EGxkN->text($wnXyT[0]); goto fpUg6; fpUg6: $EGxkN->url($wnXyT[1]); goto m94ag; hp5s0: $EGxkN = new static(); goto s5890; m94ag: $EGxkN->disabled(empty($wnXyT[2]) ? false : true); goto brkPw; s5890: $EGxkN->type($HQ4FM); goto bqGzM; ktXjr: } goto lEg9J; rwdK0: } public function render() { if ($this->disabled) { return '<a href="javascript:;" ' . ($this->blank ? 'target="_blank"' : '') . ' class="btn btn-' . $this->type . '" ' . $this->attr . '>' . $this->text . '</a>'; } else { return '<a href="' . $this->url . '" ' . ($this->blank ? 'target="_blank"' : '') . ' class="btn btn-' . $this->type . '" ' . $this->attr . '>' . $this->text . '</a>'; } } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Assets\Driver; use Illuminate\Support\Facades\Cache; use ModStart\Core\Assets\AssetsPath; use ModStart\Core\Util\PathUtil; class LocalAssetsPath implements AssetsPath { const CACHE_PREFIX = 'modstart:asset-file:'; public function getPathWithHash($Z3orD) { goto rQfIY; t4FpB: $mSCVj = Cache::get($HE8Kt = self::CACHE_PREFIX . $Z3orD, null); goto QOpmf; k0Ma4: $MVwEp = $Z3orD; goto TxI3D; W068e: return $Z3orD; goto XDXp8; GjkOd: if (null !== $mSCVj) { return $Z3orD . $XO7Nk . $mSCVj; } goto k0Ma4; QOpmf: $XO7Nk = false === strpos($Z3orD, '?') ? '?' : '&'; goto GjkOd; rQfIY: if (PathUtil::isPublicNetPath($Z3orD)) { return $Z3orD; } goto t4FpB; x57Rx: Cache::put($HE8Kt, '', 0); goto W068e; k1Utj: if (@file_exists($MVwEp)) { goto tS9yY; MyfCI: Cache::put($HE8Kt, $mSCVj, 0); goto CgBLH; tS9yY: $mSCVj = '' . crc32(md5_file($MVwEp)); goto MyfCI; CgBLH: return $Z3orD . $XO7Nk . $mSCVj; goto Hcg2r; Hcg2r: } goto x57Rx; TxI3D: if ('&' == $XO7Nk) { $MVwEp = substr($Z3orD, 0, strpos($Z3orD, '?')); } goto k1Utj; XDXp8: } public function getCDN($Z3orD) { return config('modstart.asset.cdn'); } }

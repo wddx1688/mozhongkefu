@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\App\Api; use Illuminate\Support\Facades\Cache; use Illuminate\Support\Facades\Route; use ModStart\ModStart; use ModStart\Module\ModuleManager; class ModStartApi { private static function listModuleRoutes() { goto WLTf0; hy_Rj: $a3n3M = array(); goto LZcoR; LZcoR: foreach ($RwIYu as $C1S_N) { if (file_exists($Z3orD = ModuleManager::path($C1S_N, 'Api/routes.php'))) { $a3n3M[$C1S_N] = $Z3orD; } } goto aHrQx; WLTf0: $RwIYu = ModuleManager::listAllInstalledModulesInRequiredOrder(true); goto hy_Rj; aHrQx: return $a3n3M; goto Jw6sv; Jw6sv: } public static function registerModuleRoutes() { goto XCkGE; VHJ1A: foreach ($Q9kQu as $C1S_N => $Z3orD) { Route::group(array('prefix' => config('modstart.api.prefix'), 'middleware' => array('api.bootstrap', 'api.session'), 'namespace' => "\\Module\\{$C1S_N}\\Api\\Controller"), function ($router) use($Z3orD) { if (file_exists($Z3orD)) { require $Z3orD; } }); } goto uefm0; uefm0: if (file_exists($m7P8u = modstart_api_path('routes.php'))) { require $m7P8u; } goto Ueh4l; XCkGE: if (config('env.APP_DEBUG')) { $Q9kQu = self::listModuleRoutes(); } else { if (method_exists(ModStart::class, 'cacheKey')) { $Q9kQu = Cache::rememberForever(ModStart::cacheKey('ModStartApiRoutes'), function () { return self::listModuleRoutes(); }); } else { $Q9kQu = self::listModuleRoutes(); } } goto VHJ1A; Ueh4l: } }

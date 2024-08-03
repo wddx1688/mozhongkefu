@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\LiveChat\Core; use Illuminate\Events\Dispatcher; use Illuminate\Support\ServiceProvider; use ModStart\Admin\Config\AdminMenu; use Module\ImServer\Core\Listener\RequestListenerProvider; use Module\LiveChat\Listener\StaffRequestListener; use Module\LiveChat\Listener\UserRequestListener; use Module\LiveChat\Provider\LiveChatHomePageProvider; use Module\Vendor\Provider\HomePage\HomePageProvider; class ModuleServiceProvider extends ServiceProvider { public function boot(Dispatcher $HLRQG) { goto P2xRQ; Fzo1v: RequestListenerProvider::register(StaffRequestListener::class); goto UikyP; P2xRQ: HomePageProvider::register(LiveChatHomePageProvider::class); goto Fzo1v; vVK1s: AdminMenu::register(function () { return array(array('title' => '在线客服', 'icon' => 'comment', 'sort' => 150, 'children' => array(array('title' => '客户管理', 'url' => '\\Module\\LiveChat\\Admin\\Controller\\UserController@index'), array('title' => '离线留言', 'url' => '\\Module\\LiveChat\\Admin\\Controller\\OfflineMessageController@index'), array('title' => '客服账号', 'url' => '\\Module\\LiveChat\\Admin\\Controller\\AccountController@index'), array('title' => '渠道管理', 'url' => '\\Module\\LiveChat\\Admin\\Controller\\ChannelController@index')))); }); goto SZ05F; UikyP: RequestListenerProvider::register(UserRequestListener::class); goto vVK1s; SZ05F: } public function register() { } }

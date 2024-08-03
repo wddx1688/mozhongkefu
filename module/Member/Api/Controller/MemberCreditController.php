@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Api\Controller; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use ModStart\Module\ModuleBaseController; use Module\Member\Auth\MemberUser; use Module\Member\Support\MemberLoginCheck; use Module\Member\Util\MemberCreditUtil; class MemberCreditController extends ModuleBaseController implements MemberLoginCheck { public function get() { return Response::generateSuccessData(array('total' => MemberCreditUtil::getTotal(MemberUser::id()))); } public function log() { goto XvdNg; XvdNg: $ErQts = InputPackage::buildFromInput(); goto itmFa; ZmhL_: return Response::generateSuccessPaginate($ErQts->getPage(), $ErQts->getPageSize(), $NmpUA); goto km5RY; itmFa: $cD48i = array(); goto s0qb3; MWX0z: $mhShF = $FL3w1->getTrimString('type'); goto DDEqr; s0qb3: $FL3w1 = $ErQts->getJsonAsInput('search'); goto MWX0z; E4I7w: $NmpUA = MemberCreditUtil::paginateLog(MemberUser::id(), $ErQts->getPage(), $ErQts->getPageSize(), $cD48i); goto ZmhL_; DDEqr: switch ($mhShF) { case 'income': $cD48i['whereOperate'] = array('change', '>', '0'); break; case 'payout': $cD48i['whereOperate'] = array('change', '<', '0'); break; } goto E4I7w; km5RY: } }

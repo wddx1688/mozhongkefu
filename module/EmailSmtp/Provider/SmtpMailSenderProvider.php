@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\EmailSmtp\Provider; use Illuminate\Support\Facades\Mail; use ModStart\Core\Input\Response; use ModStart\ModStart; use Module\Vendor\Provider\MailSender\AbstractMailSenderProvider; class SmtpMailSenderProvider extends AbstractMailSenderProvider { const NAME = 'smtp'; public function __construct() { $ts2Yv = modstart_config(); config(array('mail' => array('driver' => 'smtp', 'host' => $ts2Yv->getWithEnv('systemEmailSmtpServer'), 'port' => $ts2Yv->getWithEnv('systemEmailSmtpSsl', false) ? 465 : 25, 'encryption' => $ts2Yv->getWithEnv('systemEmailSmtpSsl', false) ? 'ssl' : 'tls', 'from' => array('address' => $ts2Yv->getWithEnv('systemEmailSmtpUser'), 'name' => $ts2Yv->getWithEnv('systemEmailFromName', $ts2Yv->getWithEnv('siteName') . ' @ ' . $ts2Yv->getWithEnv('siteDomain'))), 'username' => $ts2Yv->getWithEnv('systemEmailSmtpUser'), 'password' => $ts2Yv->getWithEnv('systemEmailSmtpPassword')))); } public function name() { return 'smtp'; } public function send($PcW1B, $IinAz, $UeeeP, $n3GvS, $uZEpM = array()) { try { Mail::send(array(), array(), function ($AF6tQ) use($PcW1B, $IinAz, $UeeeP, $n3GvS) { if (ModStart::env() == 'laravel5') { $AF6tQ->setTo($PcW1B, $IinAz)->setBody($n3GvS, 'text/html')->setSubject($UeeeP); } else { $AF6tQ->to($PcW1B, $IinAz)->subject($UeeeP)->html($n3GvS); } }); return Response::generateSuccess(); } catch (\Exception $VPhVw) { return Response::generateError('ERROR:' . $VPhVw->getMessage()); } } }

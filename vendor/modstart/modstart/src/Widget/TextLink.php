@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; use ModStart\ModStart; class TextLink extends AbstractWidget { public static function getAssets() { return array('style' => '.ub-text-link{display:inline-block;margin-right:0.5rem;}'); } public static function make(...$wnXyT) { goto v8Q7N; S_pFw: $EGxkN->text($wnXyT[1]); goto uUvFK; uUvFK: $EGxkN->link($wnXyT[2]); goto d7GSA; BQS0M: $EGxkN->type($wnXyT[0]); goto S_pFw; v8Q7N: $EGxkN = new static(); goto BQS0M; d7GSA: return $EGxkN; goto f6mEZ; f6mEZ: } public static function __callStatic($HQ4FM, $wnXyT) { goto SUkA1; d_MS5: if (in_array($HQ4FM, $m8cil)) { goto wv4ZH; U4ZJ8: $EGxkN->text($wnXyT[0]); goto q_156; q_156: $EGxkN->link($wnXyT[1]); goto RD56T; V7FKU: return $EGxkN->render(); goto hW7Br; RD56T: $EGxkN->attr(empty($wnXyT[2]) ? '' : $wnXyT[2]); goto V7FKU; solbT: $EGxkN->type($HQ4FM); goto U4ZJ8; wv4ZH: $EGxkN = new static(); goto solbT; hW7Br: } goto FChJS; SUkA1: $m8cil = array('primary', 'muted', 'warning', 'danger', 'success'); goto d_MS5; FChJS: throw new \Exception('TextLink error ' . join(',', $m8cil) . ' '); goto Olimi; Olimi: } public function render() { if ($this->disabled) { return '<a href="javascript:;" class="ub-text-link ub-text-muted">' . $this->text . '</a>'; } else { return '<a href="' . $this->link . '" class="ub-text-link ub-text-' . ($this->type == 'primary' ? 'link' : $this->type) . '" ' . $this->attr . '>' . $this->text . '</a>'; } } }

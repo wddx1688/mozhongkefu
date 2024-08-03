@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Field; use ModStart\Core\Exception\BizException; use ModStart\Core\Util\SerializeUtil; class JsonIdItems extends AbstractField { const ITEM_STYLE_TITLE = 'title'; const ITEM_STYLE_COVER_TITLE = 'coverTitle'; protected function setup() { $this->addVariables(array('itemStyle' => self::ITEM_STYLE_TITLE, 'selectUrl' => modstart_admin_url('path/to/select'), 'previewUrl' => modstart_admin_url('path/to/preview'))); } public function itemStyle($VuXfH) { $this->addVariables(array('itemStyle' => $VuXfH)); return $this; } public function selectUrl($VuXfH) { $this->addVariables(array('selectUrl' => $VuXfH)); return $this; } public function previewUrl($VuXfH) { $this->addVariables(array('previewUrl' => $VuXfH)); return $this; } public function unserializeValue($VuXfH, AbstractField $dBa7F) { if (null === $VuXfH) { return $VuXfH; } return @json_decode($VuXfH, true); } public function serializeValue($VuXfH, $Wa8N4) { return SerializeUtil::jsonEncode($VuXfH); } public function prepareInput($VuXfH, $Wa8N4) { goto cvmF_; cvmF_: $pKNCN = @json_decode($VuXfH, true); goto Dbhsh; Dbhsh: BizException::throwsIf($this->label . ' ' . L('Json Format Error'), $VuXfH && null === $pKNCN); goto G3fYs; G3fYs: return $pKNCN; goto xr29Z; xr29Z: } }

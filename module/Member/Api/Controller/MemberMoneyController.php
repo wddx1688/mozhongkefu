@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Api\Controller; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use ModStart\Module\ModuleBaseController; use Module\Member\Auth\MemberUser; use Module\Member\Support\MemberLoginCheck; use Module\Member\Util\MemberMoneyUtil; class MemberMoneyController extends ModuleBaseController implements MemberLoginCheck { public function get() { return Response::generateSuccessData(array('total' => MemberMoneyUtil::getTotal(MemberUser::id()))); } public function log() { goto JL_P8; AV1yC: $mhShF = $FL3w1->getTrimString('type'); goto YxNRt; YfCkb: return Response::generateSuccessPaginate($ErQts->getPage(), $ErQts->getPageSize(), $NmpUA); goto JNR0w; hx3Id: $FL3w1 = $ErQts->getSearchInput(); goto AV1yC; bQcn5: $NmpUA = MemberMoneyUtil::paginateLog(MemberUser::id(), $ErQts->getPage(), $ErQts->getPageSize(), $cD48i); goto YfCkb; JL_P8: $ErQts = InputPackage::buildFromInput(); goto YhsPT; YxNRt: switch ($mhShF) { case 'income': $cD48i['whereOperate'] = array('change', '>', '0'); break; case 'payout': $cD48i['whereOperate'] = array('change', '<', '0'); break; } goto bQcn5; YhsPT: $cD48i = array(); goto hx3Id; JNR0w: } }

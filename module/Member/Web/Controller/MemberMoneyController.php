@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Web\Controller; use ModStart\App\Web\Layout\WebPage; use ModStart\Field\AbstractField; use ModStart\Field\AutoRenderedFieldValue; use ModStart\Grid\Grid; use ModStart\Grid\GridFilter; use ModStart\Repository\Filter\RepositoryFilter; use Module\Member\Auth\MemberUser; use Module\Member\Support\MemberLoginCheck; class MemberMoneyController extends MemberFrameController implements MemberLoginCheck { private $api; public function __construct() { parent::__construct(); $this->api = app(\Module\Member\Api\Controller\MemberMoneyController::class); } public function index(WebPage $ZkvUG) { goto DYhnI; aKSK2: return $ZkvUG->pageTitle('钱包')->view($tURZC)->body($qCqqU)->handleGrid($qCqqU); goto fzkpa; BtWgw: list($tURZC, $HdyS4) = $this->viewPaths('memberMoney.index'); goto aKSK2; LEzHK: $qCqqU->disableCUD()->disableItemOperate(); goto JoYtC; I72Z_: $qCqqU->gridFilter(function (GridFilter $RryBq) { $RryBq->range('created_at', '时间')->datetime(); }); goto LEzHK; DYhnI: $qCqqU = Grid::make('member_money_log'); goto EQQ37; JoYtC: $qCqqU->useSimple(function (AbstractField $E9h4W, $AVLNU, $oPu4k) { return AutoRenderedFieldValue::makeView('module::Member.View.pc.memberMoney.item', array('item' => $AVLNU)); }); goto BtWgw; EQQ37: $qCqqU->repositoryFilter(function (RepositoryFilter $RryBq) { $RryBq->where(array('memberUserId' => MemberUser::id())); }); goto I72Z_; fzkpa: } }

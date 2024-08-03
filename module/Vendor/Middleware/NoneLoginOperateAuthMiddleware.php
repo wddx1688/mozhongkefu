@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Middleware; use ModStart\Core\Exception\BizException; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Request; use ModStart\Core\Util\TimeUtil; use Module\Vendor\Util\NoneLoginOperateUtil; class NoneLoginOperateAuthMiddleware { public function handle($Sh3_E, \Closure $JNgx0) { goto Ee_vE; YP4FO: BizException::throwsIf('已超时效（操作时间显示为24小时内，timestamp=' . time() . '）', !($e3gVC <= time() && $e3gVC > time() - TimeUtil::PERIOD_DAY)); goto gfsIY; gfsIY: $G2VTB = $ErQts->getTrimString('nonce'); goto HAvC3; CuJou: $N3mYq = NoneLoginOperateUtil::sign(Request::path(), $G2VTB, $e3gVC, $ErQts->getTrimString('param')); goto lvF5L; Ee_vE: $ErQts = InputPackage::buildFromInput(); goto UMNkL; UMNkL: $e3gVC = $ErQts->getInteger('timestamp'); goto YP4FO; WPgxJ: return $JNgx0($Sh3_E); goto Um_y3; hmdGT: BizException::throwsIfEmpty('nonce为空', $G2VTB); goto Pq0GA; lvF5L: BizException::throwsIf('sign错误', $B3XXm != $N3mYq); goto WPgxJ; Pq0GA: BizException::throwsIfEmpty('sign为空', $B3XXm); goto CuJou; HAvC3: $B3XXm = $ErQts->getTrimString('sign'); goto hmdGT; Um_y3: } }

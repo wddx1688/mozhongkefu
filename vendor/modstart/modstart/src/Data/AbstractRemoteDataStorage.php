@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Data; use ModStart\Core\Util\PathUtil; abstract class AbstractRemoteDataStorage extends AbstractDataStorage { protected $remoteType = ''; public function driverName() { return $this->remoteType; } public function domain() { return modstart_config()->getWithEnv($this->remoteType . '_Domain'); } public function domainInternal() { return modstart_config()->getWithEnv($this->remoteType . '_DomainInternal', modstart_config()->getWithEnv($this->remoteType . '_Domain')); } public function updateDriverDomain($nx179) { goto T919Q; T919Q: $L9MUd = array('driver' => $this->remoteType, 'domain' => $this->domain()); goto d1exG; d1exG: $this->repository->updateData($nx179['id'], $L9MUd); goto fYo7w; fYo7w: return array_merge($nx179, $L9MUd); goto ZxHCb; ZxHCb: } public function getDriverFullPath($hCl98) { goto NmxIB; Xav1Z: if (PathUtil::isPublicNetPath($hCl98)) { return $hCl98; } goto FX8KE; NmxIB: $hCl98 = parent::getDriverFullPath($hCl98); goto Xav1Z; FX8KE: return $this->domain() . $hCl98; goto nCwGJ; nCwGJ: } public function getDriverFullPathInternal($hCl98) { goto NXz81; FrZn6: if (PathUtil::isPublicNetPath($hCl98)) { return $hCl98; } goto UL92O; UL92O: return $this->domainInternal() . $hCl98; goto o1TYi; NXz81: $hCl98 = parent::getDriverFullPath($hCl98); goto FrZn6; o1TYi: } }

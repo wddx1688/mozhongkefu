@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Command; use Illuminate\Console\Command; use ModStart\Core\Dao\ModelUtil; abstract class BaseDumpDemoDataCommand extends Command { protected $signature = 'dump-demo-data'; protected function buildInsert() { goto h2Jxa; OAeuV: return $Xo27W; goto o5BVg; iYceA: foreach ($TixiM as $S_2ik) { if (is_array($S_2ik)) { goto RfUhn; qxO97: $T2vvu = isset($S_2ik[2]) ? $S_2ik[2] : null; goto HOo3F; HOo3F: if ($T2vvu) { $Xo27W[$S_2ik[0]] = array_filter($Xo27W[$S_2ik[0]], $T2vvu); } goto aB8WK; RfUhn: $Xo27W[$S_2ik[0]] = ModelUtil::all($S_2ik[0], array(), $S_2ik[1]); goto qxO97; aB8WK: } else { $Xo27W[$S_2ik] = ModelUtil::all($S_2ik); } } goto OAeuV; h2Jxa: $Xo27W = array(); goto g9SoJ; g9SoJ: $TixiM = func_get_args(); goto iYceA; o5BVg: } protected function buildUpdate() { goto DLIxF; Zo9SY: $PYH4S = array(); goto w1f7P; DLIxF: $wovD1 = func_get_args(); goto Zo9SY; yXz_r: return $PYH4S; goto QYOet; w1f7P: foreach ($wovD1 as $ARkdo) { $PYH4S[] = array('table' => $ARkdo[0], 'where' => $ARkdo[1], 'update' => ModelUtil::get($ARkdo[0], $ARkdo[1], $ARkdo[2])); } goto yXz_r; QYOet: } protected function buildDump($XWlC_) { goto pw9IB; pw9IB: @mkdir(public_path('data_demo')); goto sOFQL; sOFQL: file_put_contents($n8fWJ = public_path('data_demo/data.php'), '<' . '?php return ' . var_export($XWlC_, true) . ';'); goto kOCR0; kOCR0: $this->info("dump success -> {$n8fWJ}"); goto KH4x4; KH4x4: } public abstract function handle(); }

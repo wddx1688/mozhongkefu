@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\App\OpenApi\Util; use ModStart\Core\Input\Response; use ModStart\Core\Util\CurlUtil; use ModStart\Core\Util\SerializeUtil; use ModStart\Core\Util\SignUtil; class ModStartOpenApi { private $apiBase; private $key; private $secret; public static function create($p03YT, $cANPj = null, $FNyzN = null) { $vETjU = new ModStartOpenApi(); return $vETjU->setApiBase($p03YT)->setKey($cANPj)->setSecret($FNyzN); } public function setApiBase($p03YT) { $this->apiBase = $p03YT; return $this; } public function setKey($cANPj) { $this->key = $cANPj; return $this; } public function setSecret($FNyzN) { $this->secret = $FNyzN; return $this; } public function post($ikc2A, $nx179) { goto TF0Fz; pCwvi: if (Response::isError($nMi2c)) { return Response::generateError($nMi2c['msg']); } goto WSkun; WSkun: return $nMi2c['data']; goto bJKam; BCDqH: $kKcR8['timestamp'] = time(); goto I79Fb; rzAOx: $kKcR8['key'] = $this->key; goto BCDqH; I79Fb: $kKcR8['sign'] = SignUtil::common($kKcR8, $this->secret); goto SS7wf; SS7wf: $nMi2c = CurlUtil::postJSON($this->apiBase . $ikc2A, SerializeUtil::jsonEncode(array_merge($kKcR8, $nx179)), array('header' => array('Content-Type' => 'application/json', 'Accept' => 'application/json'))); goto pCwvi; TF0Fz: $kKcR8 = array(); goto rzAOx; bJKam: } }

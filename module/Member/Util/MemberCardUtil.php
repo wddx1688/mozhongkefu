@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Util; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Input\Response; use Module\Member\Model\MemberCard; class MemberCardUtil { public static function create($tJ6XI, $UegGl, $rHF3n, $u0rBB = null) { goto IltPv; ooTUg: return $XWlC_; goto c4vXr; In6wA: $XWlC_['expire'] = $u0rBB; goto W0hQy; bID2D: $XWlC_['memberUserId'] = $tJ6XI; goto L5t90; UWhty: $XWlC_['quotaTotal'] = $rHF3n; goto Lj881; Lj881: $XWlC_ = ModelUtil::insert('member_card', $XWlC_); goto ooTUg; L5t90: $XWlC_['biz'] = $UegGl; goto In6wA; W0hQy: $XWlC_['quotaUsed'] = 0; goto UWhty; IltPv: $XWlC_ = array(); goto bID2D; c4vXr: } public static function consume($tJ6XI, $UegGl, $rHF3n = 1) { goto ja9v2; xOSO8: if (empty($M6m2Q)) { ModelUtil::transactionCommit(); return Response::generateError('额度不足'); } goto FpxNB; ja9v2: ModelUtil::transactionBegin(); goto hxTSS; hxTSS: $M6m2Q = MemberCard::where(array('memberUserId' => $tJ6XI, 'biz' => $UegGl))->where('expire', '>', date('Y-m-d H:i:s'))->whereRaw('quotaUsed+' . intval($rHF3n) . ' <= quotaTotal')->orderBy('expire', 'asc')->first(); goto xOSO8; QBnlL: ModelUtil::transactionCommit(); goto RbNJi; tGpvi: $M6m2Q->save(); goto QBnlL; RbNJi: return Response::generateSuccess(); goto Wyk81; FpxNB: $M6m2Q->quotaUsed += $rHF3n; goto tGpvi; Wyk81: } }

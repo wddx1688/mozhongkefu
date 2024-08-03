@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Email; use Illuminate\Support\Facades\View; use ModStart\Core\Exception\BizException; use ModStart\Core\Input\Response; abstract class AbstractEmailSender { protected abstract function sendExecute($PcW1B, $IinAz, $UeeeP, $n3GvS, $uZEpM = array()); public function send($PcW1B, $UeeeP, $mPYOc, $NALde = array(), $IinAz = null, $uZEpM = array(), $NS22k = null) { goto tIxe2; tIxe2: $tURZC = $mPYOc; goto Ta3jN; N__OE: try { goto Y9BeH; Y9BeH: $FZUh3 = $this->sendExecute($PcW1B, $IinAz, $UeeeP, $n3GvS, $uZEpM); goto sNIOl; axDhv: return Response::generateSuccess(); goto InXxp; sNIOl: BizException::throwsIfResponseError($FZUh3); goto axDhv; InXxp: } catch (BizException $VPhVw) { return Response::generateError($VPhVw->getMessage()); } goto vPNDJ; t8U3Z: if (null === $IinAz) { $IinAz = $PcW1B; } goto ijuzA; ijuzA: $n3GvS = View::make($tURZC, $NALde)->render(); goto N__OE; Ta3jN: if (!view()->exists($tURZC)) { $tURZC = 'theme.' . modstart_config()->getWithEnv('siteTemplate', 'default') . '.mail.' . $mPYOc; if (!view()->exists($tURZC)) { $tURZC = 'theme.default.mail.' . $mPYOc; if (!view()->exists($tURZC)) { if ($NS22k) { $tURZC = 'module::' . $NS22k . '.View.mail.' . $mPYOc; } if (!view()->exists($tURZC)) { $tURZC = 'module::Vendor.View.mail.' . $mPYOc; } } } } goto BkjVt; BkjVt: if (!view()->exists($tURZC)) { throw new \Exception('mail view not found : ' . $tURZC); } goto t8U3Z; vPNDJ: } }

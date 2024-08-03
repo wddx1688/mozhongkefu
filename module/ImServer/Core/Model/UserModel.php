@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\ImServer\Core\Model; use ModStart\Core\Assets\AssetsUtil; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Util\ArrayUtil; class UserModel { public static function get($qzstR) { goto keFKi; keFKi: $t9mtn = ModelUtil::get('im_user', $qzstR, array('id', 'nickname', 'avatar', 'biz', 'bizId')); goto IAZHB; uZslL: return $t9mtn; goto v47R0; IAZHB: self::processDefault($t9mtn); goto uZslL; v47R0: } public static function getBiz($UegGl, $eOvnN) { goto EDA3R; Nh8Ra: self::processDefault($t9mtn); goto RZzQU; EDA3R: $t9mtn = ModelUtil::get('im_user', array('biz' => $UegGl, 'bizId' => $eOvnN)); goto Nh8Ra; RZzQU: return $t9mtn; goto pgCIF; pgCIF: } public static function listBizUserIds($UegGl, $rlYPX) { goto Jhmgq; t6R8U: return ArrayUtil::flatItemsByKey($jo_Nl, 'id'); goto HuFHj; WYxry: $jo_Nl = ModelUtil::model('im_user')->where('biz', $UegGl)->whereIn('bizId', $rlYPX)->get(array('id'))->toArray(); goto t6R8U; Jhmgq: if (empty($rlYPX)) { return array(); } goto WYxry; HuFHj: } public static function processDefault(&$t9mtn) { if (empty($t9mtn)) { return; } if (empty($t9mtn['avatar'])) { $t9mtn['avatar'] = AssetsUtil::fixFull('asset/image/avatar.svg', false); } } }

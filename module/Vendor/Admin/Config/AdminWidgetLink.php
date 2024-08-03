@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Admin\Config; class AdminWidgetLink { private static $list = array(); public static function register($xus0C) { self::$list[] = $xus0C; } public static function get() { goto dAUeP; jdbCG: foreach ($PBpnF as $U8G_W => $gghxW) { if (isset($TTbtW[$gghxW['title']])) { $TTbtW[$gghxW['title']]['list'] = array_merge($TTbtW[$gghxW['title']]['list'], $gghxW['list']); } else { $TTbtW[$gghxW['title']] = $gghxW; } } goto res57; q2J0X: foreach (self::$list as $AVLNU) { if ($AVLNU instanceof \Closure) { $FEjaa = call_user_func($AVLNU); if (!empty($FEjaa)) { if (isset($FEjaa['title']) && isset($FEjaa['list'])) { $PBpnF[] = $FEjaa; } else { $PBpnF = array_merge($PBpnF, $FEjaa); } } } else { $PBpnF[] = $AVLNU; } } goto FeF1f; dAUeP: $PBpnF = array(); goto q2J0X; res57: return array_values($TTbtW); goto pysfv; FeF1f: $TTbtW = array(); goto jdbCG; pysfv: } public static function build($TFhKm, $cssJC) { if (empty($cssJC)) { return null; } return array('title' => $TFhKm, 'list' => array_filter(array_map(function ($AVLNU) { return $AVLNU ? array('title' => $AVLNU[0], 'link' => $AVLNU[1]) : null; }, $cssJC))); } }

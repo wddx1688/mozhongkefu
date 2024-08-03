@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\App\Web; use Illuminate\Support\Facades\Cache; use Illuminate\Support\Facades\Route; use ModStart\ModStart; use ModStart\Module\ModuleManager; class ModStartWeb { private static function listModuleRoutes() { goto hkapM; AKk4L: return $a3n3M; goto d_UZN; xwu6N: foreach ($RwIYu as $C1S_N) { if (file_exists($Z3orD = ModuleManager::path($C1S_N, 'Web/routes.php'))) { $a3n3M[$C1S_N] = $Z3orD; } } goto AKk4L; GlPj2: $a3n3M = array(); goto xwu6N; hkapM: $RwIYu = ModuleManager::listAllInstalledModulesInRequiredOrder(true); goto GlPj2; d_UZN: } public static function registerModuleRoutes() { goto TEzp8; Z_yVF: if (file_exists($m7P8u = modstart_web_path('routes.php'))) { require $m7P8u; } goto rn0NE; TEzp8: if (config('env.APP_DEBUG')) { $Q9kQu = self::listModuleRoutes(); } else { if (method_exists(ModStart::class, 'cacheKey')) { $Q9kQu = Cache::rememberForever(ModStart::cacheKey('ModStartWebRoutes'), function () { return self::listModuleRoutes(); }); } else { $Q9kQu = self::listModuleRoutes(); } } goto yW2NF; yW2NF: foreach ($Q9kQu as $C1S_N => $Z3orD) { Route::group(array('prefix' => config('modstart.web.prefix'), 'middleware' => array('web.bootstrap'), 'namespace' => "\\Module\\{$C1S_N}\\Web\\Controller"), function ($router) use($Z3orD) { if (file_exists($Z3orD)) { require $Z3orD; } }); } goto Z_yVF; rn0NE: } }

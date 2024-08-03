@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; use Illuminate\Support\Facades\Redis; class RedisUtil { public static function isEnable() { return !!config('env.REDIS_HOST'); } public static function client() { goto PwDkU; y1SY3: if (null === $kJtgn) { $kJtgn = Redis::connection('default'); } goto PotU6; PwDkU: static $kJtgn = null; goto y1SY3; PotU6: return $kJtgn; goto bHvOu; bHvOu: } public static function get($cANPj) { $VuXfH = self::client()->get($cANPj); return $VuXfH; } public static function getObject($cANPj) { $VuXfH = self::client()->get($cANPj); return @json_decode($VuXfH, true); } public static function set($cANPj, $VuXfH) { self::client()->set($cANPj, $VuXfH); } public static function setnx($cANPj, $VuXfH) { return self::client()->setnx($cANPj, $VuXfH); } public static function setex($cANPj, $VuXfH, $qT0E5) { self::client()->setex($cANPj, $qT0E5, $VuXfH); } public static function setexObject($cANPj, $VuXfH, $qT0E5) { self::client()->setex($cANPj, $qT0E5, SerializeUtil::jsonEncode($VuXfH)); } public static function delete($cANPj) { self::client()->del(array($cANPj)); } public static function incr($cANPj) { self::client()->incr($cANPj); } public static function decr($cANPj) { return self::client()->decr($cANPj); } public static function expire($cANPj, $DHk5j) { self::client()->expire($cANPj, $DHk5j); } }

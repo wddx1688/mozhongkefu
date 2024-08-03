@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Util; use ModStart\Core\Exception\BizException; use ModStart\Core\Util\TreeUtil; class FilterUtil { private static function categoryGet($WcJl3, $vWdBd) { foreach ($WcJl3 as $DcCGv) { if ($DcCGv['id'] == $vWdBd) { return $DcCGv; } } return null; } public static function categoryTreeFilter($Uwy8n, $WcJl3, $mie0p = 'title', $vatYi = 'pid') { goto hZk9k; og1F5: $EYob3 = array_merge($EYob3, $c2tdu); goto Wvb4E; xtXYG: $c2tdu = TreeUtil::nodesChildrenIds($WcJl3, $Uwy8n); goto og1F5; y8XWi: $DcCGv = null; goto rldIn; FhnHD: return array($DcCGv, $EYob3, $ypCtU, $aLxhW, $pqelM); goto yY0Y0; biHh_: $pqelM = array(); goto y8XWi; Wvb4E: $ypCtU = TreeUtil::nodesChainWithItems($WcJl3, $Uwy8n); goto FhnHD; bnj35: $EYob3 = array($Uwy8n); goto xtXYG; hZk9k: $aLxhW = array(); goto biHh_; rldIn: if ($Uwy8n) { goto FBrlU; fBCqG: BizException::throwsIfEmpty('分类不存在', $DcCGv); goto SZkKf; Hb4Pw: $pqelM[] = $DcCGv[$mie0p]; goto SaJHo; SaJHo: if ($DcCGv[$vatYi]) { $qn5SC = self::categoryGet($WcJl3, $DcCGv[$vatYi]); $pqelM[] = $qn5SC[$mie0p]; } goto eeHSv; FBrlU: $DcCGv = self::categoryGet($WcJl3, $Uwy8n); goto fBCqG; SZkKf: $aLxhW[] = $DcCGv[$mie0p]; goto Hb4Pw; eeHSv: } goto bnj35; yY0Y0: } }

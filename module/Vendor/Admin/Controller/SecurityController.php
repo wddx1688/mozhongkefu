@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Core\Input\InputPackage; use Illuminate\Support\Facades\Session; use ModStart\Admin\Layout\AdminPage; use ModStart\Core\Exception\BizException; use ModStart\Core\Input\Response; use ModStart\Form\Form; use ModStart\Widget\Box; class SecurityController extends Controller { public static $PermitMethodMap = array('*' => '*'); public function secondVerify(AdminPage $ZkvUG) { goto toQK5; HcaVA: $mDpIY = $ErQts->getTrimString('redirect', modstart_admin_url('')); goto rhC5y; rhC5y: $yAhCR = Form::make(''); goto PpTId; kzUC3: $yAhCR->formClass('wide'); goto cwJbJ; poF4S: $yAhCR->showReset(false); goto kzUC3; PpTId: $yAhCR->password('password', '安全验证密码'); goto poF4S; cwJbJ: return $ZkvUG->pageTitle('二次安全验证')->body(Box::make($yAhCR, '二次安全验证'))->handleForm($yAhCR, function (Form $yAhCR) use($mDpIY) { $XWlC_ = $yAhCR->dataForming(); $ESrAL = $XWlC_['password']; $dF8tP = modstart_config('Vendor_SecuritySecondVerifyPassword'); BizException::throwsIf('密码不正确', md5($ESrAL) != $dF8tP); Session::set('Vendor_SecuritySecondVerifyTime', time() + 3600); return Response::send(0, null, null, $mDpIY); }); goto Z0xSB; toQK5: $ErQts = InputPackage::buildFromInput(); goto HcaVA; Z0xSB: } }

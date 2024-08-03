@@ -1,0 +1,25 @@
+{
+    "name": "LiveChat",
+    "title": "在线客服",
+    "types": [
+        "PC",
+        "Mobile"
+    ],
+    "env": [
+        "laravel5",
+        "laravel9"
+    ],
+    "require": [
+        "Vendor:>=2.0.0",
+        "ImServer",
+        "Member"
+    ],
+    "version": "1.2.0",
+    "modstartVersion": ">=2.3.0",
+    "author": "ModStart",
+    "description": "为在线匿名用户或会员用户提供在线客服功能",
+    "providers": [
+    ],
+    "config": {
+    }
+}

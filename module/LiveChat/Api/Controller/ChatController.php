@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\LiveChat\Api\Controller; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use Module\ImServer\Core\Model\ServiceModel; use Module\ImServer\Core\Repository\UserAuthRepository; use Module\LiveChat\Api\Support\ChatLoginCheck; use Module\LiveChat\Util\ChannelUtil; use Module\LiveChat\Util\UserUtil; use Module\Member\Auth\MemberUser; class ChatController extends AbstractChatController implements ChatLoginCheck { public function init() { goto l9c26; OBKLJ: $XWlC_ = array('token' => $FZUh3['data']['token'], 'serviceId' => $FhRrv['id'], 'serviceStatus' => $FhRrv['status'], 'imUserId' => $t9mtn['id'], 'channel' => $ybVCD); goto e9HJU; MQcKj: $ybVCD = ChannelUtil::getByAlias($ybVCD); goto QFjT5; l9c26: $ErQts = InputPackage::buildFromInput(); goto MZFo1; kO70i: $FhRrv = ServiceModel::create($t9mtn['id'], 'LC'); goto OBKLJ; MBTaK: UserUtil::update($t9mtn['id'], array('memberUserId' => MemberUser::id())); goto kO70i; tUfOW: $FZUh3 = UserAuthRepository::generateToken('LCUser', $this->userId(), $this->user('nickname'), $this->user('avatar')); goto iSl_2; iSl_2: $t9mtn = $FZUh3['data']['user']; goto MBTaK; QFjT5: if (empty($ybVCD)) { return Response::generateError('渠道不存在'); } goto tUfOW; MZFo1: $ybVCD = $ErQts->getTrimString('channel'); goto MQcKj; e9HJU: return Response::generateSuccessData($XWlC_); goto NVo6v; NVo6v: } }
